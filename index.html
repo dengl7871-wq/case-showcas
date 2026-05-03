@@ -1633,6 +1633,70 @@
       box-shadow: none;
     }
 
+    .case-fold {
+      display: block;
+    }
+
+    .case-summary-toggle {
+      display: block;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      outline: none;
+    }
+
+    .case-summary-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .case-summary-toggle .case-head {
+      position: relative;
+      padding-right: 112px;
+      border-bottom: 0;
+      transition: background 0.18s ease;
+    }
+
+    .case-summary-toggle:hover .case-head {
+      background: rgba(247, 242, 239, 0.55);
+    }
+
+    .case-summary-toggle:focus-visible .case-head {
+      box-shadow: inset 0 0 0 1px rgba(161, 43, 36, 0.34);
+    }
+
+    .case-fold[open] > .case-summary-toggle .case-head {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case-summary-toggle .case-head::after {
+      content: "展开";
+      position: absolute;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 54px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #f5f1ec;
+      color: var(--soft-ink);
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .case-fold[open] > .case-summary-toggle .case-head::after {
+      content: "收起";
+      color: var(--seal);
+      background: var(--seal-soft);
+    }
+
+    .case-detail {
+      display: block;
+    }
+
     .case-head {
       padding: 26px 28px 22px;
       border-bottom: 1px solid var(--line);
@@ -1768,6 +1832,18 @@
       .case-title {
         font-size: 24px;
       }
+
+      .case-summary-toggle .case-head {
+        padding-right: 28px;
+        padding-bottom: 72px;
+      }
+
+      .case-summary-toggle .case-head::after {
+        right: 24px;
+        top: auto;
+        bottom: 24px;
+        transform: none;
+      }
     }
 
     @media (max-width: 520px) {
@@ -1819,7 +1895,7 @@
         </p>
         <div class="hero-metrics">
           <div class="metric">
-            <strong>12</strong>
+            <strong>15</strong>
             已录入案例
           </div>
           <div class="metric">
@@ -1866,6 +1942,9 @@
           <a href="#case-11"><span>11</span>八字 · 流年综合</a>
           <a href="#case-12"><span>12</span>八字 · 事业合作</a>
           <a href="#case-13"><span>13</span>八字 · 财运副业</a>
+          <a href="#case-14"><span>14</span>小六壬 · 钥匙定位</a>
+          <a href="#case-15"><span>15</span>小六壬 · 猫粮猫条</a>
+          <a href="#case-16"><span>16</span>小六壬 · 床底反馈</a>
         </div>
       </aside>
 
@@ -2370,6 +2449,123 @@
             </div>
             <p class="quote">财运不是只看有没有钱，而是看你能不能承接机会，以及合作、人际、副业会不会一起把钱引出来。</p>
           </article>
+
+          <article class="case-card" id="case-14" data-category="失物" data-tool="小六壬" data-keywords="小六壬 钥匙 失物定位 西北 高处 冰箱 方位判断 即时反馈">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">小六壬</span>
+                  <span class="tag">失物寻找</span>
+                  <span class="tag">方位判断</span>
+                  <span class="tag">即时反馈</span>
+                </div>
+                <h2 class="case-title">案例 14｜钥匙失物定位：西北方与高处验证</h2>
+                <p class="case-summary">客户家钥匙遗失，通过小六壬判断方位与物象，最终反馈钥匙位于西北方向、冰箱上方。</p>
+              </div>
+              <div class="case-number">案<br>14</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>小六壬。用于失物寻找、即时方位、空间层级与物象提示。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>客户急着出门，反馈家钥匙找不到，请求判断钥匙大致位置。</p>
+              </div>
+              <div class="field full">
+                <h3>核心判断</h3>
+                <p>方位重点落在西北方向；物品大概率在静止处、高处，环境可能靠近白色、绿色或生活储物区域，建议查看衣服口袋、夹层、冰箱附近或上方。</p>
+              </div>
+              <div class="field">
+                <h3>现实反馈</h3>
+                <p>客户反馈钥匙在西北方向，最终找到位置为冰箱上方，对应高处、静止位置与生活储物区域。</p>
+              </div>
+              <div class="field">
+                <h3>亮点</h3>
+                <p>判断细化到具体方位、高处与静止位置，并在短时间内获得现实反馈。</p>
+              </div>
+            </div>
+            <p class="quote">失物判断最有价值的地方，是把模糊的“找不到”落到具体方位、空间和物象上。</p>
+          </article>
+
+          <article class="case-card" id="case-15" data-category="失物" data-tool="小六壬" data-keywords="小六壬 猫粮 猫条 宠物用品 东北 木制 箱子 柜子 收纳">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">小六壬</span>
+                  <span class="tag">失物寻找</span>
+                  <span class="tag">宠物用品</span>
+                  <span class="tag">箱内验证</span>
+                </div>
+                <h2 class="case-title">案例 15｜猫粮猫条定位：木制区域与箱内验证</h2>
+                <p class="case-summary">客户寻找猫条猫粮，通过小六壬判断与木制、箱柜、收纳区域有关，后续反馈物品仍在箱子里面。</p>
+              </div>
+              <div class="case-number">案<br>15</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>小六壬。通过方位、五行物象和空间状态缩小日常失物的搜索范围。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>客户找不到猫条猫粮，询问物品所在位置。</p>
+              </div>
+              <div class="field full">
+                <h3>核心判断</h3>
+                <p>方位重点落在东北方向；环境与木制品、箱子、柜子、收纳空间有关。物品可能处于未取出、被收纳、被遮挡状态，建议优先查看箱子、柜子、高处或木制区域。</p>
+              </div>
+              <div class="field">
+                <h3>现实反馈</h3>
+                <p>客户反馈物品还在箱子里面，对应箱柜、收纳、未取出的判断。</p>
+              </div>
+              <div class="field">
+                <h3>亮点</h3>
+                <p>能从五行物象落到具体空间，也能判断物品是被收纳、被遮挡，还是处在某类空间里。</p>
+              </div>
+            </div>
+            <p class="quote">小六壬不只看方向，也能看物品像是被收纳、被遮挡，还是处在某类空间里。</p>
+          </article>
+
+          <article class="case-card" id="case-16" data-category="失物" data-tool="小六壬" data-keywords="小六壬 宠物物品 南方 床底 低处 隐蔽 遮挡 即时反馈">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">小六壬</span>
+                  <span class="tag">失物寻找</span>
+                  <span class="tag">宠物物品</span>
+                  <span class="tag">床底反馈</span>
+                </div>
+                <h2 class="case-title">案例 16｜宠物物品定位：南方与床底反馈</h2>
+                <p class="case-summary">客户寻找宠物相关物品，判断先看南方与房间内低处空间，后续反馈最终在床底找到。</p>
+              </div>
+              <div class="case-number">案<br>16</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>小六壬。适合把失物问题从大方向进一步拆到高低、明暗、遮挡和角落层级。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>客户反馈宠物相关物品找不到，请求判断位置。</p>
+              </div>
+              <div class="field full">
+                <h3>核心判断</h3>
+                <p>先看报数时对应的南方区域；若南方无结果，再看房间内隐蔽、低处、角落空间。结合物象提示，与床下、柜下、收纳边缘等隐藏位置有关。</p>
+              </div>
+              <div class="field">
+                <h3>现实反馈</h3>
+                <p>客户反馈最终在床底下找到，对应隐蔽、低处、遮挡空间的判断。</p>
+              </div>
+              <div class="field">
+                <h3>亮点</h3>
+                <p>从方位判断延伸到空间层级，反馈明确，适合展示失物判断的日常实用场景。</p>
+              </div>
+            </div>
+            <p class="quote">有些东西不是丢了，而是被藏在低处、角落、遮挡位。小六壬能帮助缩小搜索范围。</p>
+          </article>
         </div>
         <div class="empty" id="empty">没有找到匹配案例。换一个关键词试试。</div>
       </div>
@@ -2447,6 +2643,48 @@
       return summary;
     }
 
+    function foldCaseCards() {
+      cards.forEach((card) => {
+        if (card.querySelector(":scope > .case-fold")) return;
+
+        const head = card.querySelector(":scope > .case-head");
+        const body = card.querySelector(":scope > .case-body");
+        const quote = card.querySelector(":scope > .quote");
+        if (!head || !body) return;
+
+        const fold = document.createElement("details");
+        fold.className = "case-fold";
+        if (window.location.hash === `#${card.id}`) fold.open = true;
+
+        const summary = document.createElement("summary");
+        summary.className = "case-summary-toggle";
+        summary.appendChild(head);
+
+        const detail = document.createElement("div");
+        detail.className = "case-detail";
+        detail.appendChild(body);
+        if (quote) detail.appendChild(quote);
+
+        fold.appendChild(summary);
+        fold.appendChild(detail);
+        card.appendChild(fold);
+      });
+    }
+
+    function openCaseFromHash() {
+      if (!window.location.hash) return;
+      const target = document.querySelector(window.location.hash);
+      if (!target) return;
+
+      const caseFold = target.querySelector(":scope > .case-fold");
+      const toolGroup = target.closest(".tool-group");
+      const categoryGroup = target.closest(".category-group");
+      if (categoryGroup) categoryGroup.open = true;
+      if (toolGroup) toolGroup.open = true;
+      if (caseFold) caseFold.open = true;
+      window.setTimeout(() => target.scrollIntoView({ block: "start" }), 80);
+    }
+
     function buildAccordions() {
       const grouped = new Map();
 
@@ -2504,16 +2742,7 @@
         casesContainer.appendChild(categoryDetails);
       });
 
-      if (window.location.hash) {
-        const target = document.querySelector(window.location.hash);
-        if (target) {
-          const toolGroup = target.closest(".tool-group");
-          const categoryGroup = target.closest(".category-group");
-          if (toolGroup) toolGroup.open = true;
-          if (categoryGroup) categoryGroup.open = true;
-          window.setTimeout(() => target.scrollIntoView({ block: "start" }), 80);
-        }
-      }
+      openCaseFromHash();
     }
 
     function applyFilters() {
@@ -2557,7 +2786,9 @@
     });
 
     search.addEventListener("input", applyFilters);
+    window.addEventListener("hashchange", openCaseFromHash);
 
+    foldCaseCards();
     buildAccordions();
     applyFilters();
   </script>
