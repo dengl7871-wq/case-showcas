@@ -1,0 +1,2345 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>观象案例库｜咨询案例展示</title>
+  <style>
+    :root {
+      --paper: #fbfbfa;
+      --white: #ffffff;
+      --ink: #151515;
+      --soft-ink: #4f4a45;
+      --muted: #81796f;
+      --line: #e8e4df;
+      --line-dark: #24201c;
+      --seal: #9b241f;
+      --seal-soft: #f5e9e6;
+      --jade: #315f56;
+      --jade-soft: #edf4f1;
+      --shadow: 0 18px 48px rgba(39, 32, 25, 0.06);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(155, 36, 31, 0.055), transparent 26%),
+        linear-gradient(180deg, #ffffff 0%, var(--paper) 56%, #ffffff 100%);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "Microsoft YaHei", serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .site {
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto;
+      padding: 34px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .seal {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--seal);
+      color: var(--seal);
+      font-size: 15px;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .toplinks {
+      display: flex;
+      gap: 22px;
+      color: var(--soft-ink);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .toplinks a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 54px;
+      min-height: 520px;
+      align-items: center;
+      padding: 60px 0 46px;
+      overflow: hidden;
+    }
+
+    .hero-art {
+      position: absolute;
+      inset: 42px 0 auto auto;
+      width: 600px;
+      height: 340px;
+      opacity: 0.24;
+      pointer-events: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 700px;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy p {
+      max-width: 690px;
+      margin-top: 26px;
+      color: var(--soft-ink);
+      font-size: 18px;
+      line-height: 1.95;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 36px;
+      max-width: 690px;
+    }
+
+    .metric {
+      border-top: 1px solid var(--line-dark);
+      padding-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .hero-panel {
+      position: relative;
+      z-index: 1;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 390px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .vertical-mark {
+      writing-mode: vertical-rl;
+      align-self: flex-end;
+      color: var(--seal);
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 6px;
+      line-height: 1.45;
+    }
+
+    .panel-note {
+      color: var(--soft-ink);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 0;
+      background: rgba(251, 251, 250, 0.92);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter {
+      height: 38px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--soft-ink);
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s ease;
+    }
+
+    .filter:hover,
+    .filter.active {
+      border-color: var(--seal);
+      background: var(--seal-soft);
+      color: var(--seal);
+    }
+
+    .search {
+      width: min(280px, 100%);
+      height: 38px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--ink);
+      outline: none;
+      font-size: 14px;
+    }
+
+    .search:focus {
+      border-color: var(--jade);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      gap: 28px;
+      margin-top: 28px;
+      align-items: start;
+    }
+
+    .index-panel {
+      position: sticky;
+      top: 82px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .index-panel h2 {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .index-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .index-list a {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: baseline;
+      color: var(--soft-ink);
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .index-list span {
+      color: var(--seal);
+      font-size: 12px;
+      font-family: Georgia, serif;
+    }
+
+    .cases {
+      display: grid;
+      gap: 18px;
+    }
+
+    .case-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .case-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: var(--paper);
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .tag.tool {
+      border-color: rgba(49, 95, 86, 0.28);
+      background: var(--jade-soft);
+      color: var(--jade);
+    }
+
+    .case-title {
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .case-summary {
+      margin-top: 14px;
+      color: var(--soft-ink);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .case-number {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      border: 1px solid var(--seal);
+      color: var(--seal);
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .case-body {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+    }
+
+    .field {
+      min-width: 0;
+      padding: 22px 24px;
+      background: var(--white);
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field h3 {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .field h3::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--seal);
+    }
+
+    .field p,
+    .field li {
+      color: var(--soft-ink);
+      font-size: 15px;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+    }
+
+    .field ul {
+      margin: 0;
+      padding-left: 1.15em;
+    }
+
+    .quote {
+      padding: 24px 28px;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(155, 36, 31, 0.08), transparent 42%),
+        var(--paper);
+      border-top: 1px solid var(--line);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .empty {
+      display: none;
+      padding: 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      color: var(--muted);
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .empty.show {
+      display: block;
+    }
+
+    .footer {
+      margin-top: 42px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line-dark);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        gap: 20px;
+      }
+
+      .hero-panel,
+      .index-panel {
+        position: static;
+      }
+
+      .vertical-mark {
+        writing-mode: horizontal-tb;
+        align-self: flex-start;
+        letter-spacing: 2px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site {
+        width: calc(100% - 32px);
+        padding-top: 22px;
+      }
+
+      .topbar,
+      .toolbar,
+      .case-head {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .toplinks {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .hero {
+        padding: 38px 0 32px;
+      }
+
+      h1 {
+        max-width: 340px;
+        font-size: 36px;
+        line-height: 1.12;
+      }
+
+      .hero-copy p {
+        font-size: 16px;
+      }
+
+      .hero-metrics,
+      .case-body {
+        grid-template-columns: 1fr;
+      }
+
+      .case-number {
+        width: 52px;
+        height: 52px;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .hero-panel {
+        min-height: auto;
+        gap: 42px;
+        padding: 28px;
+      }
+
+      .hero-art {
+        width: 420px;
+        right: -120px;
+      }
+
+      .case-title {
+        font-size: 24px;
+      }
+
+      .toolbar {
+        position: static;
+      }
+
+      .search {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .site {
+        width: 358px;
+        max-width: 358px;
+        margin-left: 16px;
+        margin-right: 0;
+      }
+
+      .hero {
+        overflow: hidden;
+      }
+
+      .hero-copy p,
+      .panel-note,
+      .case-summary,
+      .field p,
+      .field li,
+      .quote {
+        overflow-wrap: anywhere;
+      }
+    }
+    /* Apple-inspired technology redesign */
+    :root {
+      --paper: #f5f5f7;
+      --white: rgba(255, 255, 255, 0.82);
+      --ink: #1d1d1f;
+      --soft-ink: #424245;
+      --muted: #86868b;
+      --line: rgba(0, 0, 0, 0.08);
+      --line-dark: rgba(0, 0, 0, 0.14);
+      --seal: #0071e3;
+      --seal-soft: rgba(0, 113, 227, 0.1);
+      --jade: #30d158;
+      --jade-soft: rgba(48, 209, 88, 0.12);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.08);
+      --radius: 24px;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-strong: rgba(255, 255, 255, 0.92);
+      --blue: #0071e3;
+      --blue-dark: #005bbf;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 74% 8%, rgba(0, 113, 227, 0.18), transparent 31%),
+        radial-gradient(circle at 12% 20%, rgba(175, 82, 222, 0.12), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #f5f5f7 44%, #ffffff 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    .site {
+      width: min(1200px, calc(100% - 48px));
+      padding-top: 18px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(24px) saturate(1.6);
+      -webkit-backdrop-filter: blur(24px) saturate(1.6);
+    }
+
+    .seal {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 11px;
+      color: #fff;
+      background: linear-gradient(145deg, #0a84ff, #0071e3 54%, #5e5ce6);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 18px rgba(0, 113, 227, 0.24);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .brand-text strong {
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .brand-text span {
+      margin-top: 3px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .toplinks {
+      gap: 6px;
+      color: var(--soft-ink);
+      font-size: 13px;
+    }
+
+    .toplinks a {
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: 0.18s ease;
+    }
+
+    .toplinks a:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--ink);
+    }
+
+    .hero {
+      grid-template-columns: minmax(0, 1fr) 360px;
+      min-height: 640px;
+      padding: 76px 0 54px;
+      gap: 42px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 46px auto auto 50%;
+      width: 540px;
+      height: 540px;
+      transform: translateX(-20%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 38% 34%, rgba(255, 255, 255, 0.94), transparent 28%),
+        radial-gradient(circle at 60% 58%, rgba(0, 113, 227, 0.2), transparent 45%),
+        linear-gradient(135deg, rgba(0, 113, 227, 0.14), rgba(175, 82, 222, 0.12));
+      filter: blur(4px);
+      pointer-events: none;
+    }
+
+    .hero-art {
+      inset: 110px -72px auto auto;
+      width: 620px;
+      opacity: 0.26;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-art g {
+      stroke: #0071e3;
+    }
+
+    h1 {
+      max-width: 780px;
+      font-size: clamp(56px, 7.6vw, 104px);
+      line-height: 0.96;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .hero-copy p {
+      max-width: 720px;
+      margin-top: 28px;
+      color: var(--soft-ink);
+      font-size: 20px;
+      line-height: 1.72;
+      font-weight: 400;
+    }
+
+    .hero-metrics {
+      gap: 12px;
+      margin-top: 42px;
+    }
+
+    .metric {
+      min-height: 112px;
+      padding: 18px 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+      color: var(--muted);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.045);
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    }
+
+    .metric strong {
+      margin-bottom: 10px;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-panel {
+      min-height: 430px;
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 32px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.58)),
+        radial-gradient(circle at 70% 12%, rgba(0, 113, 227, 0.18), transparent 34%);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(28px) saturate(1.55);
+      -webkit-backdrop-filter: blur(28px) saturate(1.55);
+    }
+
+    .vertical-mark {
+      writing-mode: horizontal-tb;
+      align-self: flex-start;
+      max-width: 260px;
+      color: var(--ink);
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+    }
+
+    .panel-note {
+      color: var(--soft-ink);
+      font-size: 16px;
+      line-height: 1.74;
+    }
+
+    .toolbar {
+      top: 82px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(24px) saturate(1.5);
+      -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    }
+
+    .filters {
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.045);
+    }
+
+    .filter {
+      height: 36px;
+      padding: 0 15px;
+      border: 0;
+      background: transparent;
+      color: var(--soft-ink);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .filter:hover,
+    .filter.active {
+      background: #ffffff;
+      color: var(--blue);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .search {
+      height: 44px;
+      border: 1px solid transparent;
+      background: rgba(0, 0, 0, 0.045);
+      color: var(--ink);
+      font-size: 14px;
+      border-radius: 999px;
+    }
+
+    .search:focus {
+      border-color: rgba(0, 113, 227, 0.35);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+    }
+
+    .layout {
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    .index-panel,
+    .case-card {
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.07);
+      backdrop-filter: blur(20px) saturate(1.35);
+      -webkit-backdrop-filter: blur(20px) saturate(1.35);
+    }
+
+    .index-panel {
+      top: 164px;
+      padding: 22px;
+    }
+
+    .index-panel h2 {
+      border-bottom-color: var(--line);
+      font-size: 17px;
+      font-weight: 650;
+    }
+
+    .index-list a {
+      grid-template-columns: 42px minmax(0, 1fr);
+      padding: 8px 10px;
+      border-radius: 14px;
+      color: var(--soft-ink);
+      font-size: 13px;
+      transition: 0.18s ease;
+    }
+
+    .index-list a:hover {
+      background: rgba(0, 113, 227, 0.08);
+      color: var(--blue);
+    }
+
+    .index-list span {
+      color: var(--blue);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      font-weight: 650;
+    }
+
+    .case-card {
+      overflow: hidden;
+    }
+
+    .case-head {
+      padding: 30px 30px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tag {
+      min-height: 27px;
+      padding: 5px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(0, 0, 0, 0.035);
+      color: var(--muted);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .tag.tool {
+      border-color: transparent;
+      background: rgba(0, 113, 227, 0.11);
+      color: var(--blue);
+    }
+
+    .case-title {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.22;
+    }
+
+    .case-summary {
+      margin-top: 13px;
+      color: var(--soft-ink);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .case-number {
+      width: 58px;
+      height: 58px;
+      border: 0;
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(0, 113, 227, 0.12), rgba(94, 92, 230, 0.12));
+      color: var(--blue);
+      font-weight: 700;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
+    .case-body {
+      gap: 0;
+      background: transparent;
+    }
+
+    .field {
+      padding: 24px 28px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .field:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .field h3 {
+      gap: 10px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .field h3::before {
+      width: 8px;
+      height: 8px;
+      background: var(--blue);
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12);
+    }
+
+    .field p,
+    .field li {
+      color: var(--soft-ink);
+      font-size: 15px;
+      line-height: 1.82;
+    }
+
+    .quote {
+      border-top: 0;
+      background: linear-gradient(90deg, rgba(0, 113, 227, 0.1), rgba(94, 92, 230, 0.08));
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: -0.005em;
+    }
+
+    .footer {
+      border-top-color: var(--line);
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .topbar {
+        top: 8px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-panel,
+      .index-panel {
+        position: static;
+      }
+
+      .toolbar {
+        top: 0;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site {
+        width: calc(100% - 32px);
+      }
+
+      .topbar {
+        border-radius: 24px;
+        align-items: stretch;
+      }
+
+      .toplinks {
+        justify-content: space-between;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: 44px;
+        line-height: 1.03;
+      }
+
+      .hero-copy p {
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        border-radius: 28px;
+      }
+
+      .vertical-mark {
+        font-size: 30px;
+      }
+
+      .toolbar {
+        border-radius: 22px;
+      }
+
+      .filters {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+      }
+
+      .filter {
+        flex: 0 0 auto;
+      }
+
+      .case-head,
+      .case-body {
+        grid-template-columns: 1fr;
+      }
+
+      .case-title {
+        font-size: 26px;
+      }
+
+      .field,
+      .field:nth-child(2n) {
+        border-right: 0;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .site {
+        width: 358px;
+        max-width: 358px;
+        margin-left: 16px;
+        margin-right: 0;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+    }
+
+    .cases {
+      gap: 22px;
+    }
+
+    .category-group,
+    .tool-group {
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.065);
+      overflow: hidden;
+      backdrop-filter: blur(20px) saturate(1.35);
+      -webkit-backdrop-filter: blur(20px) saturate(1.35);
+    }
+
+    .category-group[open],
+    .tool-group[open] {
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .category-summary,
+    .tool-summary {
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    .category-summary::-webkit-details-marker,
+    .tool-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .category-summary {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 26px 30px;
+    }
+
+    .summary-main {
+      min-width: 0;
+    }
+
+    .summary-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      margin-bottom: 10px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(0, 113, 227, 0.1);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .summary-title {
+      display: block;
+      color: var(--ink);
+      font-size: 30px;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+    }
+
+    .summary-desc {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .summary-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 72px;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.055);
+      color: var(--soft-ink);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .summary-count::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-left: 10px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform 0.2s ease;
+    }
+
+    .category-group[open] > .category-summary .summary-count::after,
+    .tool-group[open] > .tool-summary .summary-count::after {
+      transform: rotate(-135deg) translateY(-1px);
+    }
+
+    .tool-stack {
+      display: grid;
+      gap: 14px;
+      padding: 0 18px 18px;
+    }
+
+    .tool-group {
+      border-radius: 24px;
+      box-shadow: none;
+      background: rgba(245, 245, 247, 0.82);
+    }
+
+    .tool-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .tool-group[open] > .tool-summary {
+      border-bottom-color: var(--line);
+    }
+
+    .tool-name {
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 720;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .tool-cases {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .tool-cases .case-card {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.055);
+    }
+
+    .category-group.hidden-by-filter,
+    .tool-group.hidden-by-filter,
+    .case-card.hidden-by-filter {
+      display: none;
+    }
+
+    @media (max-width: 720px) {
+      .category-summary {
+        grid-template-columns: 1fr;
+        padding: 22px;
+      }
+
+      .summary-title {
+        font-size: 26px;
+      }
+
+      .summary-count {
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .tool-stack {
+        padding: 0 12px 12px;
+      }
+
+      .tool-cases {
+        padding: 12px;
+      }
+    }
+
+    .layout {
+      grid-template-columns: 1fr !important;
+    }
+
+    .index-panel {
+      position: static !important;
+      top: auto !important;
+    }
+
+    .index-list {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    /* Refined minimal Chinese editorial theme */
+    :root {
+      --paper: #fbfaf7;
+      --white: #ffffff;
+      --ink: #171310;
+      --soft-ink: #4c4640;
+      --muted: #8a8178;
+      --line: #e7e0d7;
+      --line-dark: #2a241f;
+      --seal: #a12b24;
+      --seal-soft: #f7eeeb;
+      --jade: #385f57;
+      --jade-soft: #edf3f1;
+      --shadow: 0 18px 50px rgba(37, 29, 22, 0.055);
+      --radius: 10px;
+      --blue: #a12b24;
+    }
+
+    body {
+      background:
+        linear-gradient(90deg, rgba(23, 19, 16, 0.018) 1px, transparent 1px),
+        linear-gradient(180deg, #ffffff 0%, var(--paper) 48%, #ffffff 100%);
+      background-size: 36px 36px, auto;
+      color: var(--ink);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "Microsoft YaHei", serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site {
+      width: min(1120px, calc(100% - 44px));
+      padding-top: 30px;
+    }
+
+    .topbar {
+      position: static;
+      padding: 0 0 18px;
+      border: 0;
+      border-bottom: 1px solid var(--line-dark);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .seal {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--seal);
+      border-radius: 0;
+      color: var(--seal);
+      background: transparent;
+      box-shadow: none;
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .brand-text strong {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .toplinks {
+      gap: 26px;
+      font-size: 13px;
+      color: var(--soft-ink);
+    }
+
+    .toplinks a {
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .toplinks a:hover {
+      background: transparent;
+      color: var(--seal);
+    }
+
+    .hero {
+      grid-template-columns: minmax(0, 1fr) 320px;
+      min-height: 500px;
+      padding: 58px 0 42px;
+      gap: 46px;
+    }
+
+    .hero::before {
+      display: none;
+    }
+
+    .hero-art {
+      inset: 92px -70px auto auto;
+      width: 520px;
+      opacity: 0.18;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-art g {
+      stroke: #171310;
+      stroke-width: 1;
+    }
+
+    h1 {
+      max-width: 720px;
+      font-size: clamp(54px, 8vw, 92px);
+      line-height: 1.03;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .hero-copy p {
+      max-width: 680px;
+      margin-top: 24px;
+      color: var(--soft-ink);
+      font-size: 18px;
+      line-height: 1.95;
+      font-weight: 400;
+    }
+
+    .hero-metrics {
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .metric {
+      min-height: auto;
+      padding: 14px 0 0;
+      border: 0;
+      border-top: 1px solid var(--line-dark);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .metric strong {
+      color: var(--ink);
+      font-size: 28px;
+      font-weight: 500;
+    }
+
+    .hero-panel {
+      min-height: 360px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .vertical-mark {
+      writing-mode: vertical-rl;
+      align-self: flex-end;
+      color: var(--seal);
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: 7px;
+      line-height: 1.35;
+    }
+
+    .panel-note {
+      color: var(--soft-ink);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      padding: 12px 0;
+      border: 0;
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: rgba(251, 250, 247, 0.92);
+      box-shadow: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .filters {
+      gap: 8px;
+      padding: 0;
+      background: transparent;
+    }
+
+    .filter {
+      height: 36px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--soft-ink);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .filter:hover,
+    .filter.active {
+      border-color: var(--seal);
+      background: var(--seal-soft);
+      color: var(--seal);
+      box-shadow: none;
+    }
+
+    .search {
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    .search:focus {
+      border-color: var(--seal);
+      box-shadow: 0 0 0 3px rgba(161, 43, 36, 0.08);
+    }
+
+    .layout {
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .index-panel,
+    .category-group,
+    .tool-group,
+    .case-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .index-panel {
+      padding: 22px;
+    }
+
+    .index-panel h2 {
+      border-bottom-color: var(--line);
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .index-list {
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    }
+
+    .index-list a {
+      padding: 6px 0;
+      border-radius: 0;
+      color: var(--soft-ink);
+      font-size: 14px;
+    }
+
+    .index-list a:hover {
+      background: transparent;
+      color: var(--seal);
+    }
+
+    .index-list span {
+      color: var(--seal);
+      font-family: Georgia, serif;
+      font-weight: 600;
+    }
+
+    .category-group {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .category-group[open],
+    .tool-group[open] {
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .category-summary {
+      padding: 26px 28px;
+    }
+
+    .summary-label {
+      background: var(--seal-soft);
+      color: var(--seal);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .summary-title {
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .summary-desc {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .summary-count {
+      min-width: 70px;
+      height: 38px;
+      background: #f5f1ec;
+      color: var(--soft-ink);
+      font-weight: 500;
+    }
+
+    .tool-stack {
+      gap: 12px;
+      padding: 0 16px 16px;
+    }
+
+    .tool-group {
+      border-radius: 8px;
+      background: #fcfbfa;
+      box-shadow: none;
+    }
+
+    .tool-summary {
+      padding: 18px 20px;
+    }
+
+    .tool-name {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .tool-cases {
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .case-card {
+      border-radius: 8px;
+      box-shadow: none;
+    }
+
+    .case-head {
+      padding: 26px 28px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      background: #fbfaf7;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .tag.tool {
+      border-color: rgba(56, 95, 87, 0.24);
+      background: var(--jade-soft);
+      color: var(--jade);
+    }
+
+    .case-title {
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1.35;
+    }
+
+    .case-summary {
+      color: var(--soft-ink);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .case-number {
+      width: 56px;
+      height: 56px;
+      border: 1px solid var(--seal);
+      border-radius: 0;
+      background: transparent;
+      color: var(--seal);
+      font-weight: 500;
+      box-shadow: none;
+    }
+
+    .field {
+      padding: 22px 24px;
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.66);
+    }
+
+    .field h3 {
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .field h3::before {
+      width: 7px;
+      height: 7px;
+      background: var(--seal);
+      box-shadow: none;
+    }
+
+    .field p,
+    .field li {
+      color: var(--soft-ink);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .quote {
+      background: #f7f2ef;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line-dark);
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      .site {
+        width: calc(100% - 32px);
+      }
+
+      .topbar {
+        border-radius: 0;
+      }
+
+      h1 {
+        font-size: 46px;
+        line-height: 1.1;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 42px 0 34px;
+      }
+
+      .hero-art {
+        inset: 160px -110px auto auto;
+        width: 430px;
+      }
+
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        min-height: 280px;
+      }
+
+      .vertical-mark {
+        writing-mode: horizontal-tb;
+        align-self: flex-start;
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+
+      .toolbar {
+        position: static;
+      }
+
+      .category-summary {
+        padding: 22px;
+      }
+
+      .summary-title {
+        font-size: 28px;
+      }
+
+      .case-title {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .site {
+        width: 358px;
+        max-width: 358px;
+        margin-left: 16px;
+        margin-right: 0;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+    <header class="topbar">
+      <div class="brand">
+        <div class="seal" aria-hidden="true">观<br>象</div>
+        <div class="brand-text">
+          <strong>观象案例库</strong>
+          <span>咨询案例 · 结构化反馈 · 匿名展示</span>
+        </div>
+      </div>
+      <nav class="toplinks" aria-label="页面导航">
+        <a href="#cases">案例</a>
+        <a href="#tools">工具</a>
+        <a href="#notes">说明</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="案例库介绍">
+      <svg class="hero-art" viewBox="0 0 680 380" aria-hidden="true">
+        <g fill="none" stroke="#151515" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M42 279 C104 226 152 216 196 249 C239 280 263 247 301 196 C352 128 420 110 487 151 C542 185 576 182 637 130"></path>
+          <path d="M76 296 C144 250 204 259 251 286 C298 312 335 289 374 242 C423 183 470 173 526 207 C568 232 598 224 646 191"></path>
+          <path d="M118 312 C179 284 237 296 288 316 C349 341 405 318 461 275 C512 236 559 237 626 261"></path>
+          <path d="M94 112 C128 77 166 66 206 89 C236 106 262 105 294 84"></path>
+          <path d="M432 73 C470 52 513 55 548 83"></path>
+          <path d="M190 151 C203 143 222 140 237 147 C253 155 260 170 257 187"></path>
+        </g>
+      </svg>
+      <div class="hero-copy">
+        <h1>观象案例库</h1>
+        <p>
+          将小六壬、八字与塔罗咨询案例整理为可公开展示的案例档案。每个案例统一匿名处理，按工具、案例、复合、工作、财运、事业、学业、流年等维度呈现，保留判断逻辑，也保留反馈证据。
+        </p>
+        <div class="hero-metrics">
+          <div class="metric">
+            <strong>07</strong>
+            已录入案例
+          </div>
+          <div class="metric">
+            <strong>03</strong>
+            工具体系
+          </div>
+          <div class="metric">
+            <strong>08</strong>
+            展示维度
+          </div>
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <div class="vertical-mark">以案见法</div>
+        <p class="panel-note">
+          不是只展示“断得准”，而是展示判断如何形成：问题在哪里，牵连在哪里，反馈如何对应，后续该如何行动。
+        </p>
+      </aside>
+    </section>
+
+    <section class="toolbar" id="tools" aria-label="筛选工具">
+      <div class="filters" role="group" aria-label="工具筛选">
+        <button class="filter active" type="button" data-filter="全部">全部</button>
+        <button class="filter" type="button" data-filter="小六壬">小六壬</button>
+        <button class="filter" type="button" data-filter="八字">八字</button>
+        <button class="filter" type="button" data-filter="四季塔罗牌">塔罗</button>
+      </div>
+      <input class="search" id="search" type="search" placeholder="搜索：复合、财运、2026..." aria-label="搜索案例">
+    </section>
+
+    <section class="layout" id="cases">
+      <aside class="index-panel">
+        <h2>案例索引</h2>
+        <div class="index-list">
+          <a href="#case-01"><span>01</span>小六壬 · 感情复合</a>
+          <a href="#case-02"><span>02</span>小六壬 · 即时走势</a>
+          <a href="#case-03"><span>03</span>八字 · 正缘画像</a>
+          <a href="#case-04"><span>04</span>八字 · 正缘筛选</a>
+          <a href="#case-05"><span>05</span>八字 · 事业流年</a>
+          <a href="#case-06"><span>06</span>塔罗 · 季度选择</a>
+          <a href="#case-08"><span>08</span>八字 · 三方牵连</a>
+        </div>
+      </aside>
+
+      <div>
+        <div class="cases">
+          <article class="case-card" id="case-01" data-category="感情" data-tool="小六壬" data-keywords="小六壬 感情 复合 情绪 判断 女A">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">小六壬</span>
+                  <span class="tag">感情关系</span>
+                  <span class="tag">复合</span>
+                  <span class="tag">女 A</span>
+                </div>
+                <h2 class="case-title">案例 01｜感情不合与复合反馈</h2>
+                <p class="case-summary">女 A 询问关系进入矛盾期后是否还有后续，以及对方当下的真实状态。</p>
+              </div>
+              <div class="case-number">案<br>01</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>小六壬。适合短期关系状态、情绪变化和当下推进方式的判断。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>双方并非完全断开，仍有牵连；矛盾核心不是单纯“爱不爱”，而是情绪冲突、面子、防御和底线被触碰。</p>
+              </div>
+              <div class="field full">
+                <h3>复合</h3>
+                <p>判断重点落在“有情绪、有反应，但不宜硬推”。建议避开争对错，不继续刺激矛盾，先让情绪退潮。后续出现复合反馈，对方有明显情绪释放，关系重新产生互动。</p>
+              </div>
+              <div class="field">
+                <h3>工作 / 事业</h3>
+                <p>本案主轴为感情，不做工作事业展开。</p>
+              </div>
+              <div class="field">
+                <h3>财运 / 学业 / 流年</h3>
+                <p>未作为本次咨询重点。此类卦更适合判断即时情绪与短期走势。</p>
+              </div>
+            </div>
+            <p class="quote">价值不在简单说“成不成”，而在看清对方正处于什么情绪，以及你该不该继续推进。</p>
+          </article>
+
+          <article class="case-card" id="case-02" data-category="即时事件" data-tool="小六壬" data-keywords="小六壬 即时事件 短期走势 反馈 客户A">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">小六壬</span>
+                  <span class="tag">短期事件</span>
+                  <span class="tag">即时反馈</span>
+                  <span class="tag">客户 A</span>
+                </div>
+                <h2 class="case-title">案例 02｜即时事件走势反馈</h2>
+                <p class="case-summary">客户 A 询问短时间内某件事的结果变化，重点看当下走势而非长期命运。</p>
+              </div>
+              <div class="case-number">案<br>02</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>小六壬。用于短期、具体、可验证的问题：当下是否有机会，是否继续，结果是否有回转。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>卦象显示“有起伏、有反馈、短期内可验证”，判断方向集中在即时事件的变化，而不是拉长到长期趋势。</p>
+              </div>
+              <div class="field">
+                <h3>复合 / 感情</h3>
+                <p>本案不是感情复合类，不做关系判断。</p>
+              </div>
+              <div class="field">
+                <h3>流年</h3>
+                <p>不按流年分析，而按短期节点观察。后续短时间内出现反馈，结果与前期判断方向相符。</p>
+              </div>
+              <div class="field full">
+                <h3>工作 / 财运 / 事业 / 学业</h3>
+                <p>对外展示时统一包装为“即时事件走势判断案例”。如果原问题涉及敏感或不适合公开的场景，不强调具体输赢，只保留“短时间内获得反馈”的专业表达。</p>
+              </div>
+            </div>
+            <p class="quote">小六壬的优势，是把模糊焦虑缩短为一个可验证的时间窗口。</p>
+          </article>
+
+          <article class="case-card" id="case-03" data-category="感情" data-tool="八字" data-keywords="八字 Ricky 辛金 女B 正缘 桃花 2026 感情">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">八字</span>
+                  <span class="tag">正缘画像</span>
+                  <span class="tag">2026 桃花</span>
+                  <span class="tag">女 B</span>
+                </div>
+                <h2 class="case-title">案例 03｜辛金女命正缘特征分析</h2>
+                <p class="case-summary">女 B 为辛金女命，巳月出生；咨询重点为正缘画像、出现时间与关系风险。</p>
+              </div>
+              <div class="case-number">案<br>03</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>八字。以原局结构、正官取象、婚姻宫引动与流年合冲综合判断。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>原局火土偏旺，有“土重金埋”的结构，自身光彩容易被压住。偏印包围也带来内向、依赖、自我怀疑与思想固化。</p>
+              </div>
+              <div class="field">
+                <h3>复合 / 感情</h3>
+                <p>传统取丙火正官为正缘，盲派角度参考亥水解局。2026 丙午年，丙火合辛金，午火合未土婚姻宫，婚恋引动明显。</p>
+              </div>
+              <div class="field">
+                <h3>事业 / 工作</h3>
+                <p>正缘画像偏火旺型男性，职业方向多见新能源、电子信息、机械、军工、文化传媒、体制内等火象或强执行行业。</p>
+              </div>
+              <div class="field">
+                <h3>财运 / 学业</h3>
+                <p>此案主轴不在财运学业。可延伸为：命主需要通过能力与表达把被土压住的辛金之光打磨出来。</p>
+              </div>
+              <div class="field">
+                <h3>流年</h3>
+                <p>2026 丙午年为关键桃花年份。天地合带来吸引力，但原局有巳亥冲，后续容易因三观、观点、相处节奏产生冲突。</p>
+              </div>
+            </div>
+            <p class="quote">不是只说“哪年有桃花”，而是同时呈现特征、行业、甜点、风险与出现时间。</p>
+          </article>
+
+          <article class="case-card" id="case-04" data-category="感情" data-tool="八字" data-keywords="八字 壬水 女C 正缘筛选 官杀混杂 婚恋选择">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">八字</span>
+                  <span class="tag">正缘筛选</span>
+                  <span class="tag">官杀混杂</span>
+                  <span class="tag">女 C</span>
+                </div>
+                <h2 class="case-title">案例 04｜壬水女命正缘判断</h2>
+                <p class="case-summary">女 C 为壬水女命，辰月生；咨询重点是多桃花、多选择中如何识别真正适合的人。</p>
+              </div>
+              <div class="case-number">案<br>04</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>八字。以官杀混杂、婚恋结构、正缘取象和职业气质综合分析。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>局内金气旺，辰戌冲、水火冲；女命以官星为夫，原局有“两七杀一正官”，感情选择中容易出现多个选项。</p>
+              </div>
+              <div class="field">
+                <h3>复合 / 感情</h3>
+                <p>最终倾向以“戌土”为正缘或结婚字。戌土为火库，带外冷内热、稳重、原则性强、执行力强的特征。</p>
+              </div>
+              <div class="field">
+                <h3>工作 / 事业</h3>
+                <p>对方职业容易对应公检法、监管、能源、电气、电子信息、军工、技术管理、项目制或体系化结构领域。</p>
+              </div>
+              <div class="field">
+                <h3>财运 / 学业</h3>
+                <p>本案不以财运学业为主。重点是识别“有吸引力的人”与“能长期落地的人”之间的差异。</p>
+              </div>
+              <div class="field">
+                <h3>流年</h3>
+                <p>本案更重原局与婚恋取象，流年可作为后续出现与推进节点的补充。</p>
+              </div>
+            </div>
+            <p class="quote">多选择不等于多正缘。真正关键，是看谁能进入长期结构。</p>
+          </article>
+
+          <article class="case-card" id="case-05" data-category="事业" data-tool="八字" data-keywords="八字 女D 己土 2026 事业 财运 感情 流年 桃花 贵人 证书">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">八字</span>
+                  <span class="tag">2026 流年</span>
+                  <span class="tag">事业提升</span>
+                  <span class="tag">女 D</span>
+                </div>
+                <h2 class="case-title">案例 05｜己土女命 2026 事业与感情流年</h2>
+                <p class="case-summary">女 D，1998 年己亥女，己土日主，寅月生；重点看 2026 年事业、财运与桃花联动。</p>
+              </div>
+              <div class="case-number">案<br>05</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>八字。以日主调候、用神、伤官见官化解、流年神煞与婚姻宫引动综合判断。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>己土生于寅月，初春土寒，需火来温暖。两个巳火能温暖庚辛金，使食神伤官所代表的才华技术得到展现。</p>
+              </div>
+              <div class="field">
+                <h3>事业 / 工作</h3>
+                <p>2026 丙午年为大火年，火为用神得力。丙火正印入局，利证书、头衔、专业认证、上司资源与贵人支持。</p>
+              </div>
+              <div class="field">
+                <h3>财运</h3>
+                <p>午火带天乙、禄神，有升职、加薪、奖金、实质资源兑现的象。事业高潮期集中在 5、6、7 月。</p>
+              </div>
+              <div class="field">
+                <h3>复合 / 感情</h3>
+                <p>午火桃花引动，异性缘增强。亥午暗合动婚姻宫，桃花带有长期发展倾向，但起步可能较低调。</p>
+              </div>
+              <div class="field">
+                <h3>学业 / 流年</h3>
+                <p>印星旺，利证书、考核、专业身份升级。2026 的重点不是单一桃花，而是事业资源与感情机会同步被引动。</p>
+              </div>
+            </div>
+            <p class="quote">这个案例展示的是联动判断：事业、贵人、证书、财运与桃花并不是彼此孤立的。</p>
+          </article>
+
+          <article class="case-card" id="case-06" data-category="事业" data-tool="四季塔罗牌" data-keywords="塔罗 四季塔罗牌 女E 季度 工作 学业 事业 现实压力 选择">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">四季塔罗牌</span>
+                  <span class="tag">季度状态</span>
+                  <span class="tag">事业选择</span>
+                  <span class="tag">女 E</span>
+                </div>
+                <h2 class="case-title">案例 06｜季度状态与事业选择</h2>
+                <p class="case-summary">女 E 抽到正位权杖二、逆位圣杯四、逆位宝剑侍从、逆位星币二、逆位魔法师。</p>
+              </div>
+              <div class="case-number">案<br>06</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>四季塔罗牌。用于季度状态、选择压力、现实承接能力与行动建议。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>权杖二代表向外拓展、换方向、做长线选择；逆位圣杯四显示从停滞麻木中恢复，开始愿意接受新机会。</p>
+              </div>
+              <div class="field">
+                <h3>工作 / 事业</h3>
+                <p>逆位宝剑侍从提示信息不足、思维混乱，不适合仓促决定。适合先核实信息、看清成本，再决定是否转向。</p>
+              </div>
+              <div class="field">
+                <h3>财运</h3>
+                <p>逆位星币二代表现实层面的时间、金钱、精力失衡。此阶段不宜多线消耗，应收拢资源。</p>
+              </div>
+              <div class="field">
+                <h3>学业</h3>
+                <p>若对应学习或备考，核心是目标过散、执行落地不足。先完成一件确定事项，比同时展开多个计划更有效。</p>
+              </div>
+              <div class="field">
+                <h3>复合 / 流年</h3>
+                <p>本案不主感情复合，也不按流年推演。逆位魔法师作为指引牌，指出能量分散、想得多做得少是关键问题。</p>
+              </div>
+            </div>
+            <p class="quote">不是所有新机会都要立刻冲。先判断自己有没有承接能力。</p>
+          </article>
+
+          <article class="case-card" id="case-08" data-category="感情" data-tool="八字" data-keywords="八字 女F 男A 男B 人际关系 感情 三方牵连 边界 复合">
+            <div class="case-head">
+              <div>
+                <div class="case-kicker">
+                  <span class="tag tool">八字</span>
+                  <span class="tag">人际关系</span>
+                  <span class="tag">三方牵连</span>
+                  <span class="tag">女 F / 男 A / 男 B</span>
+                </div>
+                <h2 class="case-title">案例 08｜男友、异性朋友与关系边界判断</h2>
+                <p class="case-summary">女 F 询问自己、男 A 及男 B 之间的关系。现实中她曾因男 B 与男 A 发生争执。</p>
+              </div>
+              <div class="case-number">案<br>08</div>
+            </div>
+            <div class="case-body">
+              <div class="field">
+                <h3>工具</h3>
+                <p>八字。用于拆解三方关系结构：正式伴侣、异性朋友、人情资源与边界感。</p>
+              </div>
+              <div class="field">
+                <h3>案例</h3>
+                <p>女 F 与男 A 为正式关系，男 B 为异性朋友。男 A 认为女 F 与男 B 关系过近，产生吃醋、不满和防御情绪。</p>
+              </div>
+              <div class="field full">
+                <h3>复合 / 感情</h3>
+                <p>重点不是简单判断“谁喜欢谁”，而是判断三个人的位置。男 A 会对这段异性关系敏感；男 B 不是完全普通路人，有陪伴、玩乐、资源、人情往来的象，但不一定是稳定伴侣对象。男 A 更接近长期关系结构。</p>
+              </div>
+              <div class="field">
+                <h3>工作 / 事业</h3>
+                <p>反馈中男 B 通过女 F 认识了工作机会，说明他不是单纯情绪人物，也带有资源连接与现实往来的性质。</p>
+              </div>
+              <div class="field">
+                <h3>财运</h3>
+                <p>男 B 曾给女 F 买东西，带有偏财、食伤、人际玩乐的象。此处财象不是稳定承诺，而是互动、资源与新鲜感。</p>
+              </div>
+              <div class="field">
+                <h3>学业</h3>
+                <p>本案不涉及学业。可展示为“八字不仅看婚恋，也能看人际关系里的边界与真实位置”。</p>
+              </div>
+              <div class="field">
+                <h3>流年</h3>
+                <p>本案重点在关系结构，不以年份推演为主。后续反馈显示：男 A 确实因男 B 与女 F 争执，后来男 B 与男 A 关系反而缓和。</p>
+              </div>
+            </div>
+            <p class="quote">有的人不是正缘，却会介入你的关系；有的人不是第三者，却会让正式关系失衡。</p>
+          </article>
+        </div>
+        <div class="empty" id="empty">没有找到匹配案例。换一个关键词试试。</div>
+      </div>
+    </section>
+
+    <footer class="footer" id="notes">
+      所有案例均已匿名化：客户统一使用女 A、女 B、男 A、男 B 等代称。页面内容用于案例展示与传统文化咨询作品集，不包含真实姓名、联系方式或精确身份信息。
+    </footer>
+  </main>
+
+  <script>
+    const filters = Array.from(document.querySelectorAll(".filter"));
+    const cards = Array.from(document.querySelectorAll(".case-card"));
+    const casesContainer = document.querySelector(".cases");
+    const search = document.querySelector("#search");
+    const empty = document.querySelector("#empty");
+    let activeTool = "全部";
+
+    const categoryMeta = {
+      "感情": {
+        label: "情感关系",
+        desc: "复合、正缘、婚恋选择、三方牵连与关系边界。"
+      },
+      "事业": {
+        label: "事业工作",
+        desc: "事业流年、工作选择、贵人资源、证书与现实承接能力。"
+      },
+      "即时事件": {
+        label: "即时走势",
+        desc: "短期事件、即时反馈、当下结果与快速验证。"
+      }
+    };
+
+    const categoryOrder = ["感情", "事业", "即时事件"];
+    const toolOrder = ["小六壬", "八字", "四季塔罗牌"];
+
+    function normalize(text) {
+      return text.toLowerCase().replace(/\s+/g, "");
+    }
+
+    function createDetailsSummary(category, total) {
+      const meta = categoryMeta[category] || { label: category, desc: "结构化案例归档。" };
+      const summary = document.createElement("summary");
+      summary.className = "category-summary";
+      summary.innerHTML = `
+        <span class="summary-main">
+          <span class="summary-label">${meta.label}</span>
+          <span class="summary-title">${category}</span>
+          <span class="summary-desc">${meta.desc}</span>
+        </span>
+        <span class="summary-count" data-total="${total}">${total} 案</span>
+      `;
+      return summary;
+    }
+
+    function createToolSummary(tool, total) {
+      const summary = document.createElement("summary");
+      summary.className = "tool-summary";
+      summary.innerHTML = `
+        <span class="tool-name">${tool}</span>
+        <span class="summary-count" data-total="${total}">${total} 案</span>
+      `;
+      return summary;
+    }
+
+    function buildAccordions() {
+      const grouped = new Map();
+
+      cards.forEach((card) => {
+        const category = card.dataset.category || "其他";
+        const tool = card.dataset.tool || "未分类工具";
+        if (!grouped.has(category)) grouped.set(category, new Map());
+        if (!grouped.get(category).has(tool)) grouped.get(category).set(tool, []);
+        grouped.get(category).get(tool).push(card);
+      });
+
+      casesContainer.innerHTML = "";
+
+      const sortedCategories = Array.from(grouped.keys()).sort((a, b) => {
+        const ai = categoryOrder.indexOf(a);
+        const bi = categoryOrder.indexOf(b);
+        return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+      });
+
+      sortedCategories.forEach((category, categoryIndex) => {
+        const tools = grouped.get(category);
+        const total = Array.from(tools.values()).reduce((sum, list) => sum + list.length, 0);
+        const categoryDetails = document.createElement("details");
+        categoryDetails.className = "category-group";
+        categoryDetails.dataset.category = category;
+        if (categoryIndex === 0) categoryDetails.open = true;
+        categoryDetails.appendChild(createDetailsSummary(category, total));
+
+        const toolStack = document.createElement("div");
+        toolStack.className = "tool-stack";
+
+        const sortedTools = Array.from(tools.keys()).sort((a, b) => {
+          const ai = toolOrder.indexOf(a);
+          const bi = toolOrder.indexOf(b);
+          return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+        });
+
+        sortedTools.forEach((tool) => {
+          const list = tools.get(tool);
+          const toolDetails = document.createElement("details");
+          toolDetails.className = "tool-group";
+          toolDetails.dataset.tool = tool;
+          toolDetails.open = true;
+          toolDetails.appendChild(createToolSummary(tool, list.length));
+
+          const toolCases = document.createElement("div");
+          toolCases.className = "tool-cases";
+          list.forEach((card) => toolCases.appendChild(card));
+
+          toolDetails.appendChild(toolCases);
+          toolStack.appendChild(toolDetails);
+        });
+
+        categoryDetails.appendChild(toolStack);
+        casesContainer.appendChild(categoryDetails);
+      });
+
+      if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+          const toolGroup = target.closest(".tool-group");
+          const categoryGroup = target.closest(".category-group");
+          if (toolGroup) toolGroup.open = true;
+          if (categoryGroup) categoryGroup.open = true;
+          window.setTimeout(() => target.scrollIntoView({ block: "start" }), 80);
+        }
+      }
+    }
+
+    function applyFilters() {
+      const query = normalize(search.value);
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const toolMatch = activeTool === "全部" || card.dataset.tool === activeTool;
+        const haystack = normalize(`${card.innerText} ${card.dataset.keywords || ""} ${card.dataset.category || ""} ${card.dataset.tool || ""}`);
+        const queryMatch = !query || haystack.includes(query);
+        const visible = toolMatch && queryMatch;
+        card.classList.toggle("hidden-by-filter", !visible);
+        if (visible) visibleCount += 1;
+      });
+
+      document.querySelectorAll(".tool-group").forEach((group) => {
+        const visibleCards = Array.from(group.querySelectorAll(".case-card")).filter((card) => !card.classList.contains("hidden-by-filter"));
+        group.classList.toggle("hidden-by-filter", visibleCards.length === 0);
+        const count = group.querySelector(".tool-summary .summary-count");
+        if (count) count.textContent = `${visibleCards.length}/${count.dataset.total} 案`;
+      });
+
+      document.querySelectorAll(".category-group").forEach((group) => {
+        const visibleCards = Array.from(group.querySelectorAll(".case-card")).filter((card) => !card.classList.contains("hidden-by-filter"));
+        group.classList.toggle("hidden-by-filter", visibleCards.length === 0);
+        if (visibleCards.length > 0 && (activeTool !== "全部" || query)) group.open = true;
+        const count = group.querySelector(":scope > .category-summary .summary-count");
+        if (count) count.textContent = `${visibleCards.length}/${count.dataset.total} 案`;
+      });
+
+      empty.classList.toggle("show", visibleCount === 0);
+    }
+
+    filters.forEach((button) => {
+      button.addEventListener("click", () => {
+        filters.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        activeTool = button.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    search.addEventListener("input", applyFilters);
+
+    buildAccordions();
+    applyFilters();
+  </script>
+</body>
+</html>

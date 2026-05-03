@@ -1,0 +1,4 @@
+qa-*.png
+chrome-*/
+edge-*/
+*.log
